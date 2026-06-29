@@ -13,7 +13,17 @@ export function Login() {
 
   const manejarEnvio = (e) => {
     e.preventDefault();
-    if (!email.includes('@') || password.length < 6) {
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailValido.test(email) && password.length < 6) {
+      setError('Ingresa un correo válido con dominio (.com, .es, etc...) y una contraseña de al menos 6 caracteres.');
+      return;
+    }
+    if (!emailValido.test(email)) {
+      setError('Ingresa un correo válido con dominio (.com, .es, etc.).');
+      return;
+    }
+    if (password.length < 6) {
       setError('Credenciales inválidas (Mínimo 6 caracteres en contraseña).');
       return;
     }
