@@ -33,7 +33,7 @@ export function Footer() {
                 Compras 007
               </Typography>
               <Typography variant="body2" sx={{ mb: 2 }}>
-                Tu plataforma digital de confianza para adquirir la mejor tecnología y accesorios del mercado con un servicio de primer nivel.
+                Tu plataforma digital de confianza para adquirir la mejor tecnología y accesorios del mercado con un servicio de primer nivel guacho.
               </Typography>
             </Box>
           </Grid>

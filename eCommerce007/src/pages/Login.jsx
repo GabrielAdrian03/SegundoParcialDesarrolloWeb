@@ -13,6 +13,8 @@ export function Login() {
 
   const manejarEnvio = (e) => {
     e.preventDefault();
+    // este array contiene los caracteres que no son válidos en un correo electrónico
+    //dentro aparece el @ porque es obligatorio en un correo electrónico, y el . porque es necesario para el dominio
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!emailValido.test(email) && password.length < 6) {

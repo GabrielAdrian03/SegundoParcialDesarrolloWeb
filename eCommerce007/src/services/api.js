@@ -1,19 +1,21 @@
 const BASE_URL = 'https://dummyjson.com';
 let cachedCategories = null;
 
+const categoryTranslations = {
+  beauty: 'Belleza',
+  fragrances: 'Fragancias',
+  furniture: 'Muebles',
+  groceries: 'Mercaderías'
+};
+
 const normalizeCategory = (item, index) => {
-  if (typeof item === 'string') {
-    return {
-      id: index + 1,
-      name: item,
-      slug: item.toLowerCase().replace(/\s+/g, '-')
-    };
-  }
+  const name = typeof item === 'string' ? item : item.name;
+  const slug = name.toLowerCase().replace(/\s+/g, '-');
 
   return {
     id: index + 1,
-    ...item,
-    slug: item.slug || item.name.toLowerCase().replace(/\s+/g, '-')
+    name: categoryTranslations[slug] || name,
+    slug
   };
 };
 

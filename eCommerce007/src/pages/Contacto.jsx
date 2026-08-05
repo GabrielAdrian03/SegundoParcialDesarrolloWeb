@@ -57,6 +57,7 @@ export function Contacto() {
             </Box>
             <Typography variant="body2" color="text.secondary" paragraph>
               ¿Tenés alguna duda sobre tu pedido, stock disponible o reembolsos?
+              Satisfacción garantizada o te devolvemos tu dinero.
             </Typography>
             <Typography variant="body2" color="text.secondary">
               Completá el formulario de soporte y nuestro equipo te responderá por correo en menos de 24 horas hábiles.

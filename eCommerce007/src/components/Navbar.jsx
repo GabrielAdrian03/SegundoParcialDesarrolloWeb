@@ -31,9 +31,6 @@ export function Navbar() {
             <Button component={Link} to="/carrito" color="inherit" sx={{ color: 'white' }}>
               Carrito
             </Button>
-            <Button component={Link} to="/perfil" color="inherit" sx={{ color: 'white' }}>
-              Perfil
-            </Button>
             <Button component={Link} to="/contacto" color="inherit" sx={{ color: 'white' }}>
               Contacto
             </Button>
