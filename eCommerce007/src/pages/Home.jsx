@@ -46,9 +46,6 @@ export function Home() {
         <Typography variant="h6" paragraph>
           Descubre los mejores productos tecnológicos, ropa y accesorios a precios increíbles.
         </Typography>
-        <Button variant="contained" color="secondary" size="large">
-          Ver Ofertas de Bienvenida
-        </Button>
       </Box>
 
       {/* Título de la Sección de Productos */}

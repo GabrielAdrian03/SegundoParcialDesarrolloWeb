@@ -26,11 +26,13 @@ export function useCategories() {
         setLoading(false);
       }
     };
-    // fetchCategories se llama dentro del useEffect para iniciar la carga de categorías cuando el componente se monta.
+    // fetchCategories se llama dentro del useEffect para iniciar la carga de categorías
+    // cuando el componente se monta.
     fetchCategories();
   }, []);
 
   // Regresa un objeto que contiene las categorías obtenidas y el estado de carga.
-  // Esto permite a los componentes que utilizan este hook acceder a las categorías y saber si aún se están cargando.
+  // Esto permite a los componentes que utilizan este hook acceder a las categorías
+  // y saber si aún se están cargando.
   return { categories, loading };
 }
