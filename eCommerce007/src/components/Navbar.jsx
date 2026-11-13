@@ -1,5 +1,8 @@
 // Importaciones para la barra de navegación de Material UI y React Router
 import { Box, Button, Container, Stack, CircularProgress } from '@mui/material';
+//el link es para poder navegar entre las rutas de la aplicación sin recargar la página
+//funciona como un <a> pero sin recargar la página, es decir, 
+// es un enlace interno de la aplicación
 import { Link } from 'react-router-dom';
 import { useCategories } from '../hooks/useCategories';
 
@@ -33,6 +36,9 @@ export function Navbar() {
             </Button>
             <Button component={Link} to="/contacto" color="inherit" sx={{ color: 'white' }}>
               Contacto
+            </Button>
+            <Button component={Link} to="/perfil" color="inherit" sx={{ color: 'white' }}>
+              Perfil
             </Button>
           </Stack>
 

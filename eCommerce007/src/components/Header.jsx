@@ -16,7 +16,7 @@ export function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           
-          {/* Contenedor del Logo y Nombre del E-commerce */}
+          {/* logo y boton al home */}
           <Box 
             component={Link} 
             to="/" 
@@ -31,7 +31,7 @@ export function Header() {
             {/* Llamada al ícono como etiqueta React */}
             <StorefrontIcon fontSize="large" />
             <Typography variant="h5" fontWeight="bold" component="div">
-              Home
+              007 Commerce
             </Typography>
           </Box>
 
@@ -45,12 +45,18 @@ export function Header() {
               {colorMode.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
 
-            {/* Botón de Bienvenida (Obligatorio) */}
+            {/* botones de login e ingreso */}
             <Button 
               variant="outlined" 
-              component={Link} to="/perfil" color="inherit" sx={{ color: 'white' }}
+              component={Link} to="/login" color="inherit" sx={{ color: 'primary.main' }}
             >
-              Perfil
+              Ingresar
+            </Button>
+            <Button 
+              variant="outlined" 
+              component={Link} to="/registro" color="inherit" sx={{ color: 'primary.main' }}
+            >
+              Registrarse
             </Button>
           </Box>
 

@@ -2,7 +2,7 @@ import { createContext, useEffect, useMemo, useState } from 'react';
 import { createTheme, ThemeProvider, CssBaseline } from '@mui/material';
 
 export const ColorModeContext = createContext({
-  mode: 'light',
+  mode: 'dark',
   toggleColorMode: () => {}
 });
 

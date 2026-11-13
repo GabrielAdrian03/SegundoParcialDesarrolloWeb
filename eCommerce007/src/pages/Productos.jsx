@@ -35,14 +35,13 @@ export function Productos() {
   });
 
   // Configuración de la paginación local en base a los artículos filtrados
-  const porPagina = 12;
+  const porPagina = 8;
   const totalPaginas = Math.ceil(filtrados.length / porPagina);
   const paginados = filtrados.slice((pagina - 1) * porPagina, pagina * porPagina);
 
   return (
     <Box>
       <Typography variant="h4" fontWeight="bold" gutterBottom>Catálogo de Productos</Typography>
-      
       {/* Controles superiores: Buscador y Selector de categorías */}
       <Grid container spacing={2} sx={{ mb: 4, mt: 1 }}>
         <Grid item xs={12} sm={8}>
@@ -69,15 +68,22 @@ export function Productos() {
         </Grid>
       </Grid>
 
-      {/* Grilla de productos con el ajuste de consola corregido */}
+      {/* grilla de productos */}
+      {paginados.length === 0 ? (
+        <Alert severity="info">No se encontraron productos que coincidan con la búsqueda.</Alert>
+      ) : (
       <Grid container spacing={3}>
         {paginados.map((p) => (
-          <Grid item key={p.id} xs={12} sm={6} md={4} lg={3}>
+          <Grid
+          key={p.id} 
+          size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
+          sx={{ display: 'flex', justifyContent: 'center' }}
+          >
             <ProductoCard producto={p} />
           </Grid>
         ))}
       </Grid>
-
+      )}
       {/* Selector gráfico de paginación */}
       {totalPaginas > 1 && (
         <Box display="flex" justifyContent="center" mt={4}>
