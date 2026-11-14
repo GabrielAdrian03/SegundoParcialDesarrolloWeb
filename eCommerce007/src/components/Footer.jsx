@@ -16,7 +16,7 @@ export function Footer() {
       sx={{ 
         bgcolor: 'grey.900', 
         color: 'grey.400', 
-        py: 6, 
+        py: 0.5, 
         mt: 'auto',
         borderTop: '1px solid',
         borderColor: 'grey.800'
@@ -24,62 +24,57 @@ export function Footer() {
     >
       <Container maxWidth="xl">
         {/* Grilla principal */}
-        <Grid container spacing={4}>
+        <Grid container spacing={2}>
           
           {/* Columna 1: Información de la Empresa */}
-          <Grid xs={12} md={4}>
-            <Box sx={{ p: 1 }}>
-              <Typography variant="h6" color="white" fontWeight="bold" gutterBottom>
+          <Grid xs={12} md={5}>
+              <Typography variant="subtitle1" color="white" fontWeight="bold" gutterBottom>
                 Compras 007
               </Typography>
-              <Typography variant="body2" sx={{ mb: 2 }}>
-                Tu plataforma digital de confianza para adquirir la mejor tecnología y accesorios del mercado con un servicio de primer nivel guacho.
+              <Typography variant="caption" display="block" sx={{ lineHeight: 1.4 }}>
+                Ni en la placita encontrás estos productos guacho.
               </Typography>
-            </Box>
           </Grid>
 
           {/* Columna 2: Datos de Contacto (Obligatorio)*/}
-          <Grid xs={12} sm={6} md={4}>
-            <Box sx={{ p: 1 }}>
-              <Typography variant="subtitle1" color="white" fontWeight="bold" gutterBottom>
+          <Grid 
+          size={{ xs:12, sm:6, md:4 }}>
+              <Typography variant="subtitle2" color="white" fontWeight="bold" gutterBottom>
                 Contacto
               </Typography>
-              <Stack spacing={1.5}>
+              <Stack spacing={0}>
                 <Box display="flex" alignItems="center" gap={1}>
-                  <EmailIcon fontSize="small" color="primary" />
-                  <Typography variant="body2">antonio007@hotmail.com</Typography>
+                  <EmailIcon sx={{ fontSize: 16 }} color="primary" />
+                  <Typography variant="caption"> antonio007@hotmail.com</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap={1}>
-                  <PhoneIcon fontSize="small" color="primary" />
-                  <Typography variant="body2">3752254565</Typography>
+                  <PhoneIcon sx={{ fontSize: 16 }} color="primary" />
+                  <Typography variant="caption"> 3752254565</Typography>
                 </Box>
                 <Box display="flex" alignItems="center" gap={1}>
-                  <LocationOnIcon fontSize="small" color="primary" />
-                  <Typography variant="body2">Ningun lugar, Kansas</Typography>
+                  <LocationOnIcon sx={{ fontSize: 16 }} color="primary" />
+                  <Typography variant="caption"> Ningun lugar, Kansas</Typography>
                 </Box>
               </Stack>
-            </Box>
           </Grid>
 
           {/* Columna 3: Redes Sociales Ficticias */}
           <Grid xs={12} sm={6} md={3}>
-            <Box sx={{ p: 1 }}>
-              <Typography variant="subtitle1" color="white" fontWeight="bold" gutterBottom>
-                {/* Antonio por que es el 008 */}
-                Antonio's Bond
+              <Typography variant="subtitle2" color="white" fontWeight="bold" gutterBottom>
+                {/* iconos de redes sociales */}
+                Antonio Bond
               </Typography>
-              <Stack direction="row" spacing={2}>
+              <Stack direction="row" spacing={1}>
                 <MuiLink href="https://www.facebook.com/profile.php?id=61578094256826&locale=es_LA" target="_blank" rel="noopener" color="inherit">
-                  <FacebookIcon />
+                  <FacebookIcon fontSize='small' />
                 </MuiLink>
                 <MuiLink href="https://instagram.com/jamesbondclothes/" target="_blank" rel="noopener" color="inherit">
-                  <InstagramIcon />
+                  <InstagramIcon fontSize='small'/>
                 </MuiLink>
                 <MuiLink href="https://x.com/007?lang=es" target="_blank" rel="noopener" color="inherit">
-                  <TwitterIcon />
+                  <TwitterIcon fontSize='small'/>
                 </MuiLink>
               </Stack>
-            </Box>
           </Grid>
 
         </Grid>
@@ -87,14 +82,14 @@ export function Footer() {
         {/* Barra Inferior del Copyright Especial Requerido */}
         <Box 
           sx={{ 
-            borderTop: '1px solid', 
+            borderTop: '0.5px solid', 
             borderColor: 'grey.800', 
-            mt: 4, 
-            pt: 3, 
+            mt: 0.5, 
+            pt: 0.5, 
             textAlign: 'center' 
           }}
         >
-          <Typography variant="body2" sx={{ fontStyle: 'italic' }}>
+          <Typography variant="caption" sx={{ fontStyle: 'italic' }}>
             Copyright 1986 todos los derechos y los izquierdos bien puestos
           </Typography>
         </Box>

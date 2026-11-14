@@ -62,58 +62,83 @@ export function DetalleProducto() {
       </Button>
 
       {/* Grilla responsiva sin el atributo "item" plano para limpiar la consola */}
-      <Grid container spacing={4}>
+      <Grid container spacing={4} alignItems="center">
         
-        {/* Columna Izquierda: Imagen de portada */}
-        <Grid xs={12} md={6}>
-          <Paper elevation={2} sx={{ p: 2, display: 'flex', justifyContent: 'center', bgcolor: 'white' }}>
+        {/* imagen */}
+        {/* el size sirve para definir el ancho en diferentes breakpoints
+        y el md sirve para definir el ancho en el breakpoint md */}
+        <Grid size={{ xs:12, md:5 }}>
+          <Paper 
+          elevation={2} 
+          sx={{ 
+            p: 0.5, 
+            height: 300,
+            display: 'flex',
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            bgcolor: 'white',
+            borderRadius: 3,
+            }}>
             <Box
               component="img"
               src={urlImagen}
               alt={producto?.title}
               sx={{
-                width: '100%',
-                maxHeight: 400,
+                width: '80%',
+                maxHeight: '100%',
                 objectFit: 'contain',
-                borderRadius: 1
+                borderRadius: 2
               }}
             />
           </Paper>
         </Grid>
 
         {/* Columna Derecha: Precios y Acciones */}
-        <Grid xs={12} md={6} sx={{ pl: { md: 4 }, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Grid 
+        size={{ xs:12, md:6 }}
+        sx={{ 
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}>
           <Box>
-            <Typography variant="subtitle2" color="secondary.main" fontWeight="bold" sx={{ textTransform: 'uppercase', mb: 1 }}>
+            <Typography 
+            variant="caption" 
+            color="secondary.main" 
+            fontWeight="bold" 
+            sx={{ textTransform: 'uppercase', mb: 0.5, display: 'block' }}>
               Categoría: {producto?.category?.name || 'General'}
             </Typography>
 
-            <Typography variant="h4" component="h1" fontWeight="bold" gutterBottom>
+            {/* Título */}
+            <Typography variant="h5" component="h1" fontWeight="bold" gutterBottom>
               {producto?.title}
             </Typography>
 
-            <Typography variant="h5" color="primary.main" fontWeight="bold" sx={{ my: 2 }}>
+            {/* Precio */}
+            <Typography variant="h6" color="primary.main" fontWeight="bold" sx={{ my: 1.5 }}>
               ${producto?.price?.toLocaleString('es-AR')}
             </Typography>
 
-            <Typography variant="body1" color="text.secondary" paragraph sx={{ lineHeight: 1.7 }}>
+            {/* Descripción */}
+            <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6, mb: 2 }}>
               {producto?.description}
             </Typography>
           </Box>
 
-          {/* Botón funcional conectado al Context de compras */}
-          <Box sx={{ mt: 4 }}>
+          {/* Botón de compras */}
+          <Box sx={{ mt: 2 }}>
             <Button
               variant="contained"
               color="primary"
-              size="large"
+              size="medium"
               fullWidth
               startIcon={<ShoppingCartIcon />}
               onClick={() => {
                 agregarProducto(producto);
                 alert(`¡Se añadió "${producto?.title}" al carrito de compras!`);
               }}
-              sx={{ py: 1.5, fontWeight: 'bold' }}
+              sx={{ px: 4, py: 1.5, fontSize: '0.9rem', fontWeight: 'bold' }}
             >
               Agregar al carrito
             </Button>
