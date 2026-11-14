@@ -16,8 +16,11 @@ export function Registro() {
 
   const manejarEnvio = (e) => {
     e.preventDefault();
-    if (!nombre || !email || password !== confirmar || password.length < 6) {
-      setError('Verifica los datos y que las contraseñas coincidan.');
+    setError('');
+    const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!nombre.trim() || !emailValido.test(email) || password !== confirmar || password.length < 6) {
+      setError('Verifica los datos y que las contraseñas coincidan(6 carácteres mínimo).');
       return;
     }
     // Llama al método del contexto obligatorio

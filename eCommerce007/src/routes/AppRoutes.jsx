@@ -1,9 +1,8 @@
 // Importación del router de React Router Dom
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 // Importación de Proveedores (Obligatorio)
 import { CartProvider } from '../contexts/CartContext.jsx';
-import { UserProvider } from '../contexts/UserContext';
+import { UserProvider, useUser } from '../contexts/UserContext';
 
 // Importación de las 8 Páginas
 import { Home } from '../pages/Home';
@@ -20,6 +19,16 @@ import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { Container } from '@mui/material';
+
+//rutas protegidas para usuarios logeados (Perfil y Carrito)
+function RutaProtegida({ children }) {
+  const { usuario } = useUser();
+  if (!usuario) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+}
 
 // Layout compartido para mantener Header, Navbar y Footer estaticos en todas las páginas
 function Layout() {
@@ -50,7 +59,8 @@ export function AppRoutes() {
               <Route path="/login" element={<Login />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/carrito" element={<Carrito />} />
-              <Route path="/perfil" element={<Perfil />} />
+              {/* Ruta protegida para el perfil del usuario */}
+              <Route path="/perfil" element={ <RutaProtegida> <Perfil /> </RutaProtegida> }/>
               <Route path="/contacto" element={<Contacto />} />
             </Route>
 

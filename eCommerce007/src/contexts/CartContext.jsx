@@ -1,47 +1,65 @@
-// Acá importo createContext, useState, useContext y useEffect de React
 import { createContext, useState, useContext, useEffect } from 'react';
+import { useUser } from './UserContext';
 
-// Se crea el contexto del carrito de compras.
 const CartContext = createContext();
 
+// Función auxiliar para leer el carrito de un usuario específico
+function leerCarritoStorage(email) {
+  if (!email) return [];
+  try {
+    const guardado = window.localStorage.getItem(`carrito-007-${email}`);
+    return guardado ? JSON.parse(guardado) : [];
+  } catch (error) {
+    return [];
+  }
+}
+
 export function CartProvider({ children }) {
-  // useState obligatorio para el Carrito (inicia leyendo localStorage)
-  const [carrito, setCarrito] = useState(() => {
-    try {
-      const guardado = window.localStorage.getItem('carrito-007');
-      return guardado ? JSON.parse(guardado) : [];
-    } catch (error) {
-      return [];
-    }
-  });
+  const { usuario } = useUser();
 
-  // Guarda automáticamente en localStorage cada vez que el carrito cambia
+  // 1. Al cargar o presionar F5, lee directamente el carrito del usuario activo
+  const [carrito, setCarrito] = useState(() => leerCarritoStorage(usuario?.email));
+
+  // 2. Sincroniza el estado cuando el usuario cambia (al hacer login o logout)
   useEffect(() => {
-    window.localStorage.setItem('carrito-007', JSON.stringify(carrito));
-  }, [carrito]);
+    setCarrito(leerCarritoStorage(usuario?.email));
+  }, [usuario?.email]);
 
-  // CRUD del carrito (Obligatorio)
+  // Función auxiliar para actualizar el estado y guardar en localStorage al mismo tiempo
+  const actualizarYGuardar = (nuevoCarrito) => {
+    setCarrito(nuevoCarrito);
+    if (usuario?.email) {
+      window.localStorage.setItem(`carrito-007-${usuario.email}`, JSON.stringify(nuevoCarrito));
+    }
+  };
+
+  // CRUD del carrito protegido
   const agregarProducto = (producto, cantidad = 1) => {
-    setCarrito((prev) => {
-      const existe = prev.find((item) => item.id === producto.id);
-      if (existe) {
-        return prev.map((item) =>
+    if (!usuario) {
+      alert('Debes iniciar sesión para agregar productos al carrito.');
+      return false;
+    }
+
+    const existe = carrito.find((item) => item.id === producto.id);
+    const nuevoCarrito = existe
+      ? carrito.map((item) =>
           item.id === producto.id ? { ...item, cantidad: item.cantidad + cantidad } : item
-        );
-      }
-      return [...prev, { ...producto, cantidad }];
-    });
+        )
+      : [...carrito, { ...producto, cantidad }];
+
+    actualizarYGuardar(nuevoCarrito);
+    return true;
   };
 
   const eliminarProducto = (id) => {
-    setCarrito((prev) => prev.filter((item) => item.id !== id));
+    const nuevoCarrito = carrito.filter((item) => item.id !== id);
+    actualizarYGuardar(nuevoCarrito);
   };
 
   const vaciarCarrito = () => {
-    setCarrito([]);
+    actualizarYGuardar([]);
   };
 
-  // Atributo "total" requerido
   const total = carrito.reduce((acc, item) => acc + item.price * item.cantidad, 0);
   const cantidadTotal = carrito.reduce((acc, item) => acc + item.cantidad, 0);
 
@@ -52,7 +70,6 @@ export function CartProvider({ children }) {
   );
 }
 
-// Se exporta un hook de useCart para acceder al contexto desde cualquier componente.
 export function useCart() {
   return useContext(CartContext);
 }

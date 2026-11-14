@@ -20,7 +20,7 @@ export function Carrito() {
 
   if (carrito.length === 0 && !compraExitosa) {
     return (
-      <Box textAlign="center" py={8}>
+      <Box textalign="center" py={8}>
         <Typography variant="h5" gutterBottom>Tu carrito está vacío</Typography>
         <Button component={Link} to="/productos" variant="contained" sx={{ mt: 2 }}>
           Ir al catálogo
@@ -35,14 +35,16 @@ export function Carrito() {
         Tu Carrito ({cantidadTotal})
       </Typography>
 
-      {/* Sintaxis correcta de Grid para MUI v9 */}
-      <Grid container spacing={4} sx={{ mt: 1 }}>
-        <Grid size={{ xs: 12, md: 8 }}>
+      {/* contenedor */}
+      <Grid container spacing={3} sx={{ mt: 1 }}>
+        <Grid size={{ xs: 12, md: 6 }}>
           {carrito.map((item) => (
-            <Card key={item.id} sx={{ display: 'flex', mb: 2, p: 2, alignItems: 'center', justifyContent: 'space-between' }}>
-              <Typography variant="subtitle1" fontWeight="bold" sx={{ width: '40%' }}>
+            <Card key={item.id} sx={{ display: 'flex', px: 2, py: 1, mb: 1.5, maxWidth: 550, alignItems: 'center', justifyContent: 'space-between', gap: 1.5 }}>
+              
+              <Typography variant="subtitle2" fontWeight="bold" noWrap sx={{ width: '45%' }}>
                 {item.title}
               </Typography>
+              
               <Typography variant="body2">Cant: {item.cantidad}</Typography>
               <Typography variant="body2" fontWeight="bold">
                 ${(item.price * item.cantidad).toLocaleString('es-AR')}
@@ -61,12 +63,14 @@ export function Carrito() {
           <Paper elevation={3} sx={{ p: 3 }}>
             <Typography variant="h6" fontWeight="bold">Resumen</Typography>
             <Divider sx={{ my: 2 }} />
-            <Box display="flex" justifyContent="space-between" mb={2}>
-              <Typography>Total:</Typography>
+
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
+              <Typography>Subtotal:</Typography>
               <Typography variant="h6" color="primary" fontWeight="bold">
                 ${total.toLocaleString('es-AR')}
               </Typography>
             </Box>
+
             <Button 
               type="button"
               variant="contained" 

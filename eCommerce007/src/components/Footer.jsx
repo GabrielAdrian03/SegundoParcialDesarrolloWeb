@@ -43,15 +43,15 @@ export function Footer() {
                 Contacto
               </Typography>
               <Stack spacing={0}>
-                <Box display="flex" alignItems="center" gap={1}>
+                <Box display="flex" alignitems="center" gap={1}>
                   <EmailIcon sx={{ fontSize: 16 }} color="primary" />
                   <Typography variant="caption"> antonio007@hotmail.com</Typography>
                 </Box>
-                <Box display="flex" alignItems="center" gap={1}>
+                <Box display="flex" alignitems="center" gap={1}>
                   <PhoneIcon sx={{ fontSize: 16 }} color="primary" />
                   <Typography variant="caption"> 3752254565</Typography>
                 </Box>
-                <Box display="flex" alignItems="center" gap={1}>
+                <Box display="flex" alignitems="center" gap={1}>
                   <LocationOnIcon sx={{ fontSize: 16 }} color="primary" />
                   <Typography variant="caption"> Ningun lugar, Kansas</Typography>
                 </Box>

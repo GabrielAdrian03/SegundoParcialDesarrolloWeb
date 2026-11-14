@@ -50,21 +50,36 @@ export function UserProvider({ children }) {
     }
   }, [pendienteRegistro]);
 
-  const login = (email, nombre = 'Usuario Invitado') => {
+  const login = (email, password) => {
     // Busca si el correo fue registrado previamente para recuperar su nombre real
-    const encontrado = usuariosRegistrados.find((u) => u.email === email);
-    setUsuario({ 
-      nombre: encontrado ? encontrado.nombre : nombre, 
-      email 
-    });
+    const emailNormalizado = email.trim().toLowerCase();
+    const encontrado = usuariosRegistrados.find(
+      (u) => u.email.toLowerCase() === emailNormalizado);
+    if (!encontrado) {
+      return {ok: false, mensaje: 'Usuario no encontrado.'};
+    }
+    if (encontrado.password !== password) {
+      return {ok: false, mensaje: 'Contraseña incorrecta.'};
+    }
+    
+    setUsuario({ nombre: encontrado.nombre, email: encontrado.email });
+    return {ok: true};
   };
 
   const logout = () => {
     setUsuario(null);
   };
-
+  // Función para registrar un nuevo usuario
   const registro = (datosUsuario) => {
-    setPendienteRegistro(datosUsuario);
+    const emailNormalizado = datosUsuario.email.trim().toLowerCase();
+    const yaExiste = usuariosRegistrados.some(
+      (u) => u.email.trim().toLowerCase() === emailNormalizado
+    );
+    if (yaExiste) {
+      return {ok: false, mensaje: 'El correo ya está registrado.'};
+    }
+    setPendienteRegistro({ ...datosUsuario, email: emailNormalizado });
+    return {ok: true};
   };
 
   return (

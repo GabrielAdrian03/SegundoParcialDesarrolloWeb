@@ -20,7 +20,7 @@ export function DetalleProducto() {
 
   if (loading) {
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
         <CircularProgress />
       </Box>
     );
@@ -135,8 +135,10 @@ export function DetalleProducto() {
               fullWidth
               startIcon={<ShoppingCartIcon />}
               onClick={() => {
-                agregarProducto(producto);
-                alert(`¡Se añadió "${producto?.title}" al carrito de compras!`);
+                const agregado = agregarProducto(producto);
+                if (agregado) {
+                  alert(`¡Se añadió "${producto?.title}" al carrito de compras!`);
+                }
               }}
               sx={{ px: 4, py: 1.5, fontSize: '0.9rem', fontWeight: 'bold' }}
             >

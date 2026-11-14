@@ -48,7 +48,7 @@ export function Contacto() {
         <Grid container spacing={4}>
           
           {/* Lado Izquierdo: Información de contacto de la tienda */}
-          <Grid item xs={12} md={4} display="flex" flexDirection="column" justifyContent="center">
+          <Grid size={{ xs:12, md:4 }} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2, color: 'primary.main' }}>
               <EmailIcon fontSize="large" />
               <Typography variant="h5" fontWeight="bold">

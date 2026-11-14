@@ -13,23 +13,24 @@ export function Login() {
 
   const manejarEnvio = (e) => {
     e.preventDefault();
+    setError('');
     // este array contiene los caracteres que no son válidos en un correo electrónico
     //dentro aparece el @ porque es obligatorio en un correo electrónico, y el . porque es necesario para el dominio
     const emailValido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!emailValido.test(email) && password.length < 6) {
-      setError('Ingresa un correo válido con dominio (.com, .es, etc...) y una contraseña de al menos 6 caracteres.');
-      return;
-    }
     if (!emailValido.test(email)) {
-      setError('Ingresa un correo válido con dominio (.com, .es, etc.).');
+      setError('Ingresa un correo válido con dominio (.com, .es ...) y una contraseña de al menos 6 caracteres.');
       return;
     }
     if (password.length < 6) {
       setError('Credenciales inválidas (Mínimo 6 caracteres en contraseña).');
       return;
     }
-    login(email, 'Antonio Comprador');
+    const resultado = login(email, password);
+    if (!resultado.ok) {
+      setError(resultado.mensaje);
+      return;
+    }
     navigate('/perfil');
   };
 

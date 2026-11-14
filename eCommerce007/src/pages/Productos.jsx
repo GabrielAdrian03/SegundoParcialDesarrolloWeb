@@ -24,7 +24,7 @@ export function Productos() {
   }, [catParam]);
 
   // Manejo de estados de carga y errores de conexión con la API
-  if (loading) return <Box display="flex" justifyContent="center" py={8}><CircularProgress /></Box>;
+  if (loading) return <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}><CircularProgress /></Box>;
   if (error) return <Alert severity="error">Error al conectar con la API: {error}</Alert>;
 
   // Lógica de filtrado combinada para buscador y categorías
@@ -86,7 +86,7 @@ export function Productos() {
       )}
       {/* Selector gráfico de paginación */}
       {totalPaginas > 1 && (
-        <Box display="flex" justifyContent="center" mt={4}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
           <Pagination 
             count={totalPaginas} 
             page={pagina} 
