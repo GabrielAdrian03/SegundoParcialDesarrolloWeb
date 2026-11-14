@@ -5,27 +5,58 @@ import { createContext, useState, useContext, useEffect } from 'react';
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  // useState obligatorio para el Usuario
-  const [usuario, setUsuario] = useState(null);
+  // useState obligatorio para el Usuario (inicia leyendo la sesión activa en localStorage)
+  const [usuario, setUsuario] = useState(() => {
+    try {
+      const usuarioGuardado = window.localStorage.getItem('usuario-007');
+      return usuarioGuardado ? JSON.parse(usuarioGuardado) : null;
+    } catch (error) {
+      return null;
+    }
+  });
+
+  // Lista opcional de usuarios registrados en localStorage para simular base de datos local
+  const [usuariosRegistrados, setUsuariosRegistrados] = useState(() => {
+    try {
+      const lista = window.localStorage.getItem('usuarios-registrados-007');
+      return lista ? JSON.parse(lista) : [];
+    } catch (error) {
+      return [];
+    }
+  });
+
   const [pendienteRegistro, setPendienteRegistro] = useState(null);
 
-  // useEffect obligatorio para Logear usuario / Simular sesión activa
+  // useEffect obligatorio para Logear usuario y guardar/limpiar sesión en localStorage
   useEffect(() => {
     if (usuario) {
       console.log(`Efecto de Login: Bienvenido ${usuario.nombre}`);
+      window.localStorage.setItem('usuario-007', JSON.stringify(usuario));
+    } else {
+      window.localStorage.removeItem('usuario-007');
     }
   }, [usuario]);
 
-  // useEffect obligatorio para Crear usuario (Simulación en consola)
+  // useEffect obligatorio para Crear usuario y guardarlo en localStorage
   useEffect(() => {
     if (pendienteRegistro) {
       console.log("Efecto de Registro: Creando usuario en sistema...", pendienteRegistro);
+      setUsuariosRegistrados((prev) => {
+        const nuevaLista = [...prev, pendienteRegistro];
+        window.localStorage.setItem('usuarios-registrados-007', JSON.stringify(nuevaLista));
+        return nuevaLista;
+      });
       setPendienteRegistro(null);
     }
   }, [pendienteRegistro]);
 
   const login = (email, nombre = 'Usuario Invitado') => {
-    setUsuario({ nombre, email });
+    // Busca si el correo fue registrado previamente para recuperar su nombre real
+    const encontrado = usuariosRegistrados.find((u) => u.email === email);
+    setUsuario({ 
+      nombre: encontrado ? encontrado.nombre : nombre, 
+      email 
+    });
   };
 
   const logout = () => {
@@ -37,7 +68,7 @@ export function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ usuario, login, logout, registro }}>
+    <UserContext.Provider value={{ usuario, usuariosRegistrados, login, logout, registro }}>
       {children}
     </UserContext.Provider>
   );

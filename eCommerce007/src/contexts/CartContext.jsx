@@ -1,14 +1,24 @@
-// Acá solo importo createContext, useState y useContext de React para crear el contexto del carrito de compras.
-import { createContext, useState, useContext } from 'react';
+// Acá importo createContext, useState, useContext y useEffect de React
+import { createContext, useState, useContext, useEffect } from 'react';
 
 // Se crea el contexto del carrito de compras.
 const CartContext = createContext();
 
-// CartProvider envuelve a los componentes hijos y proporciona el estado del carrito
-// y las funciones para manipularlo.
 export function CartProvider({ children }) {
-  // useState obligatorio para el Carrito
-  const [carrito, setCarrito] = useState([]);
+  // useState obligatorio para el Carrito (inicia leyendo localStorage)
+  const [carrito, setCarrito] = useState(() => {
+    try {
+      const guardado = window.localStorage.getItem('carrito-007');
+      return guardado ? JSON.parse(guardado) : [];
+    } catch (error) {
+      return [];
+    }
+  });
+
+  // Guarda automáticamente en localStorage cada vez que el carrito cambia
+  useEffect(() => {
+    window.localStorage.setItem('carrito-007', JSON.stringify(carrito));
+  }, [carrito]);
 
   // CRUD del carrito (Obligatorio)
   const agregarProducto = (producto, cantidad = 1) => {
