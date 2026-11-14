@@ -1,7 +1,7 @@
 import { useUser } from '../contexts/UserContext';
 import { useCart } from '../contexts/CartContext';
 import { Link } from 'react-router-dom';
-import { Container, Paper, Box, Typography, Button, Alert } from '@mui/material';
+import { Container, Paper, Stack, Typography, Button, Alert } from '@mui/material';
 
 export function Perfil() {
   // useState vinculados directamente a los contextos solicitados
@@ -24,10 +24,16 @@ export function Perfil() {
     <Container maxWidth="sm">
       <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
         <Typography variant="h5" fontWeight="bold" align="center" mb={3}>Perfil de Usuario</Typography>
-        <Typography variant="subtitle2" color="text.secondary">Nombre:</Typography>
-        <Typography variant="body1" fontWeight="medium" mb={2}>{usuario.nombre}</Typography>
-        <Typography variant="subtitle2" color="text.secondary">Email:</Typography>
-        <Typography variant="body1" fontWeight="medium" mb={3}>{usuario.email}</Typography>
+        
+        <Stack spacing={2} sx={{ my: 2 }}>
+          <Typography variant="subtitle1" fontWeight="bold" color="text.secondary">
+            Nombre: {usuario.nombre}
+          </Typography>
+          <Typography variant="subtitle1" fontWeight="bold" color="text.secondary">
+            Email: {usuario.email}
+          </Typography>
+        </Stack>
+        
         <Alert severity="info" sx={{ mb: 4 }}>
           Productos en carrito: <strong>{cantidadTotal}</strong>
         </Alert>
